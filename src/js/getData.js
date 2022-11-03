@@ -1,3 +1,5 @@
+import { fetch as fetchData } from "./fetchData.js";
+
 export const getData = async () => {
     // const group1URL = `https://capsules7.herokuapp.com/api/group/one`;
     // const group2URL = `https://capsules7.herokuapp.com/api/group/two`;

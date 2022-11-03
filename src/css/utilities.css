@@ -1,28 +1,10 @@
 :root {
     /* Tile backgrounds */
-    --bgCloudTile: url("../assets/img/tiles/cloud.png") no-repeat center
-        center/cover;
-    --bgGrassTile: url("../assets/img/tiles/grass.webp") no-repeat center
-        top/cover;
-    --bgRockTile: url("../assets/img/tiles/rock.png") no-repeat center
-        center/cover;
-    --bgSoilTile: url("../assets/img/tiles/soil.webp") no-repeat center
-        center/cover;
-    --bgTreeTile: url("../assets/img/tiles/tree.png") no-repeat center
-        center/cover;
-    --bgTreeLTile: url("../assets/img/tiles/tree-leaves.png") no-repeat center
-        center/cover;
-    /* Tools backgrounds */
-    --bgAxeTool: url("../assets/img/tools/axe.png") no-repeat center
-        center/cover;
-    --bgPickaxeTool: url("../assets/img/tools/pickaxe.png") no-repeat center
-        center/cover;
-    --bgShovelTool: url("../assets/img/tools/shovel.png") no-repeat center
-        center/cover;
+    --bgCloudTile: url("../assets/img/tiles/cloud.png") no-repeat center;
 }
 
 h1 {
-    font-size: 100px;
+    text-align: center;
 }
 
 /* Text colors */
@@ -35,6 +17,7 @@ h1 {
 .btn {
     cursor: pointer;
     display: inline-block;
+    margin: 10px;
     padding: 10px 30px;
     color: #fff;
     background-color: #1b48c5;
@@ -49,6 +32,7 @@ h1 {
 /* Features */
 .box {
     width: 33.3%;
+
     padding: 20px 30px;
     text-align: center;
     border: black solid;
@@ -63,47 +47,10 @@ h1 {
     position: relative;
     left: 2.5rem;
 }
+
 /* Flex items */
 .flex-items {
     display: flex;
-    text-align: center;
+    justify-content: center;
     align-items: center;
-}
-/* Tile items */
-
-.cloud-tile {
-    background: var(--bgCloudTile);
-}
-.grass-tile {
-    background: var(--bgGrassTile);
-}
-.rock-tile {
-    background: var(--bgRockTile);
-}
-.soil-tile {
-    background: var(--bgSoilTile);
-}
-.tree-tile {
-    background: var(--bgTreeTile);
-}
-
-.tree-leaves-tile {
-    background: var(--bgTreeLTile);
-}
-
-/* Tools items */
-
-.axe-tool {
-    background: var(--bgAxeTool);
-}
-.pickaxe-tool {
-    background: var(--bgPickaxeTool);
-}
-.shovel-tool {
-    background: var(--bgShovelTool);
-}
-
-/* Inventory */
-.inActiveTile {
-    visibility: hidden;
 }
