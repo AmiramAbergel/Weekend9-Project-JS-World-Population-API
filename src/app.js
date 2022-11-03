@@ -1,5 +1,7 @@
-import { plot as plotData } from "./js/plotData.js";
-import { fetch as fetchData } from "./js/fetchData.js";
+import { plotData as plotData } from "./js/plotData.js";
 import { getData } from "./js/getData.js";
 
-const main = () => {};
+const main = () => {
+    getData();
+};
+main();

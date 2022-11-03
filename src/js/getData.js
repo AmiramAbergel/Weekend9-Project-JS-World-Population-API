@@ -1,11 +1,19 @@
-import { fetch as fetchData } from "./fetchData.js";
+import { fetchData } from "./fetchData.js";
 
 export const getData = async () => {
-    // const group1URL = `https://capsules7.herokuapp.com/api/group/one`;
-    // const group2URL = `https://capsules7.herokuapp.com/api/group/two`;
-    // const group1Response = fetchData(group1URL);
-    // const group2Response = fetchData(group2URL);
-    // const results2Groups = await Promise.all([group1Response, group2Response]);
+    const citiesURL = `https://countriesnow.space/api/v0.1/countries/population/cities`;
+    const countryURL = `https://restcountries.com/v3.1/all`;
+    const citiesResponse = fetchData(citiesURL);
+    const countryResponse = fetchData(countryURL);
+    const results2Groups = await Promise.all([citiesResponse, countryResponse]);
+    sessionStorage.setItem("cities", JSON.stringify(results2Groups[0]));
+    sessionStorage.setItem("country", JSON.stringify(results2Groups[1]));
+    const citiesText = sessionStorage.getItem("cities");
+    const countryText = sessionStorage.getItem("country");
+    const citiesData = JSON.parse(citiesText);
+    const countryData = JSON.parse(countryText);
+    console.dir(countryData[0]);
+    //
     // const mergeData = results2Groups[0].concat(results2Groups[1]); // arr of objs
     // console.log(mergeData);
     // const users = await extractUserByID(mergeData);
