@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../src/css/utilities.css" />
         <link rel="stylesheet" href="../src/css/style.css" />
         <link rel="stylesheet" href="../src/css/mobile.css" />
+
         <title>World-Population</title>
     </head>
     <body>
@@ -21,10 +22,13 @@
                 <button class="btn">Oceania</button>
             </div>
         </header>
-        <main></main>
+        <main class="chartContainer flex-items">
+            <canvas id="chart" width="400" height="300"> </canvas>
+        </main>
         <footer>
             <div class="btnContainer"></div>
         </footer>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
         <script src="../src/app.js" defer type="module"></script>
     </body>
 </html>

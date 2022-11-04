@@ -1,4 +1,9 @@
 import { fetchData } from "./fetchData.js";
+import {
+    continents,
+    traverseCityData,
+    traverseCountryData,
+} from "./arrangeData.js";
 
 export const getData = async () => {
     const citiesURL = `https://countriesnow.space/api/v0.1/countries/population/cities`;
@@ -12,7 +17,9 @@ export const getData = async () => {
     const countryText = sessionStorage.getItem("country");
     const citiesData = JSON.parse(citiesText);
     const countryData = JSON.parse(countryText);
-    console.dir(countryData[0]);
+    traverseCountryData(continents, countryData);
+    traverseCityData(citiesData.data, continents);
+    console.dir(continents);
     //
     // const mergeData = results2Groups[0].concat(results2Groups[1]); // arr of objs
     // console.log(mergeData);
