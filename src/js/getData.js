@@ -18,8 +18,8 @@ export const getData = async () => {
     const citiesData = JSON.parse(citiesText);
     const countryData = JSON.parse(countryText);
     traverseCountryData(continents, countryData);
-    traverseCityData(citiesData.data, continents);
-    console.dir(continents);
+    const x = traverseCityData(citiesData.data, continents);
+    return x;
     //
     // const mergeData = results2Groups[0].concat(results2Groups[1]); // arr of objs
     // console.log(mergeData);
