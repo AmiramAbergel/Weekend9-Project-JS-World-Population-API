@@ -1,8 +1,8 @@
 import { plotData as plotData } from "./js/plotData.js";
 import { getData } from "./js/getData.js";
-import { myChart } from "./js/chartJS.js";
+//import { chartIt } from "./js/chartJS.js";
 
-const main = () => {
-    getData();
+const main = async () => {
+    await getData();
 };
 main();

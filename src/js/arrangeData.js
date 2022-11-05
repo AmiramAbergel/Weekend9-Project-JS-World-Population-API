@@ -1,4 +1,9 @@
 export const continents = {
+    // {countryNamePlot:[],
+    //     countryNumPlot:[],
+    //totalCountries:[]
+    // }
+
     Africa: [],
     Americas: [],
     Asia: [],
@@ -9,8 +14,11 @@ export const continents = {
 
 const constructCountryFromData = (countryObj) => {
     const country = {
-        [countryObj.name.official]: {
-            countryName: countryObj.name.official,
+        [countryObj.name.common.replace(/[^\P{L}a-z][^a-z]*/giu, "")]: {
+            countryName: countryObj.name.common.replace(
+                /[^\P{L}a-z][^a-z]*/giu,
+                ""
+            ),
             countryPopulation: countryObj.population,
         },
         cities: [],
@@ -25,7 +33,7 @@ const constructCityFromData = (cityObj) => {
         res = cityObj.populationCounts[length - 1].value;
     }
     const city = {
-        country: cityObj.country,
+        country: cityObj.country.replace(/[^\P{L}a-z][^a-z]*/giu, ""), // Remove special chars
         cityPopulation: res,
         [cityObj.city]: {
             cityName: cityObj.city,
@@ -36,11 +44,11 @@ const constructCityFromData = (cityObj) => {
 };
 export const traverseCityData = (citiesArr, continentsObj) => {
     const xs = [];
-    const ys = [];
+    //const ys = [];
     for (let i = 0; i < citiesArr.length; i++) {
         const cityObj = citiesArr[i];
         let city = constructCityFromData(cityObj);
-        xs.push(city.cityPopulation);
+        //     xs.push(city.cityPopulation);
         for (const key in continentsObj) {
             let con = continentsObj[key];
             const matchCountry = con.find((element) => {
@@ -51,16 +59,14 @@ export const traverseCityData = (citiesArr, continentsObj) => {
             }
         }
     }
-    return { xs };
+    //  return { xs };
 };
 
 export const traverseCountryData = (continentsObj, countriesObj) => {
-    const xs = [];
     const keys = Object.keys(countriesObj);
     keys.forEach((element) => {
         let country = constructCountryFromData(countriesObj[element]);
         let f = continentsObj[countriesObj[element].region];
         f.push(country);
     });
-    return { xs };
 };
