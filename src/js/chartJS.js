@@ -48,7 +48,7 @@ export const plotContinent = (event) => {
                 return element[input.textContent];
             }
         );
-        console.log(matchCountry);
+
         if (matchCountry) {
             preparingForChart(matchCountry.cities);
         }
@@ -60,11 +60,9 @@ export function preparingForChart(obj) {
     let dataArr = [];
     let labelsArr = [];
     if (obj.countryNumPlot) {
-        console.log("no");
         dataArr = obj.countryNumPlot;
         labelsArr = obj.countryNamePlot;
     } else {
-        console.log("yes");
         dataArr = obj.cityNumPlot;
         labelsArr = obj.cityNamePlot;
     }
@@ -72,7 +70,7 @@ export function preparingForChart(obj) {
     chartIt(dataArr, labelsArr);
 }
 
-export const chartIt = async (dataPlot, xLabels) => {
+export const chartIt = async (dataPlot = [], xLabels = []) => {
     const yPopNum = [];
     const data = {
         labels: xLabels,
@@ -89,7 +87,30 @@ export const chartIt = async (dataPlot, xLabels) => {
         type: "line",
         fill: false,
         data: data,
-        options: {},
+        options: {
+            animation: {
+                onComplete: function (animation) {
+                    this.options.animation.onComplete = null;
+                    let firstSet = animation.chart.config.data.datasets[0].data,
+                        dataSum = firstSet.reduce(
+                            (accumulator, currentValue) =>
+                                accumulator + currentValue,
+                            0
+                        );
+
+                    if (typeof firstSet !== "object" || dataSum === 0) {
+                        document.getElementById("no-data").style.display =
+                            "block";
+                        document.getElementById("chart").style.display = "none";
+                    } else {
+                        document.getElementById("no-data").style.display =
+                            "none";
+                        document.getElementById("chart").style.display =
+                            "block";
+                    }
+                },
+            },
+        },
     };
 
     myChart = new Chart(document.getElementById("chart"), config);
