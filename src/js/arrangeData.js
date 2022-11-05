@@ -1,19 +1,62 @@
+import { plotContinent } from "./chartJS.js";
 export const continents = {
-    // {countryNamePlot:[],
-    //     countryNumPlot:[],
-    //totalCountries:[]
-    // }
-
-    Africa: [],
-    Americas: [],
-    Asia: [],
-    Europe: [],
-    Oceania: [],
-    Antarctic: [],
+    Africa: {
+        countryNamePlot: [],
+        countryNumPlot: [],
+        totalData: [],
+        contentContainer: Object.assign(document.createElement("div"), {
+            className: "africa",
+        }),
+    },
+    Americas: {
+        countryNamePlot: [],
+        countryNumPlot: [],
+        totalData: [],
+        contentContainer: Object.assign(document.createElement("div"), {
+            className: "americas",
+        }),
+    },
+    Asia: {
+        countryNamePlot: [],
+        countryNumPlot: [],
+        totalData: [],
+        contentContainer: Object.assign(document.createElement("div"), {
+            className: "asia",
+        }),
+    },
+    Europe: {
+        countryNamePlot: [],
+        countryNumPlot: [],
+        totalData: [],
+        contentContainer: Object.assign(document.createElement("div"), {
+            className: "europe",
+        }),
+    },
+    Oceania: {
+        countryNamePlot: [],
+        countryNumPlot: [],
+        totalData: [],
+        contentContainer: Object.assign(document.createElement("div"), {
+            className: "oceania",
+        }),
+    },
+    Antarctic: {
+        countryNamePlot: [],
+        countryNumPlot: [],
+        totalData: [],
+        contentContainer: Object.assign(document.createElement("div"), {
+            className: "africa",
+        }),
+    },
 };
 
 const constructCountryFromData = (countryObj) => {
     const country = {
+        countryName: countryObj.name.common.replace(
+            /[^\P{L}a-z][^a-z]*/giu,
+            ""
+        ),
+        countryPopulation: countryObj.population,
         [countryObj.name.common.replace(/[^\P{L}a-z][^a-z]*/giu, "")]: {
             countryName: countryObj.name.common.replace(
                 /[^\P{L}a-z][^a-z]*/giu,
@@ -21,7 +64,7 @@ const constructCountryFromData = (countryObj) => {
             ),
             countryPopulation: countryObj.population,
         },
-        cities: [],
+        cities: { cityNamePlot: [], cityNumPlot: [], totalData: [] },
     };
     return country;
 };
@@ -34,6 +77,7 @@ const constructCityFromData = (cityObj) => {
     }
     const city = {
         country: cityObj.country.replace(/[^\P{L}a-z][^a-z]*/giu, ""), // Remove special chars
+        cityName: cityObj.city,
         cityPopulation: res,
         [cityObj.city]: {
             cityName: cityObj.city,
@@ -43,30 +87,47 @@ const constructCityFromData = (cityObj) => {
     return city;
 };
 export const traverseCityData = (citiesArr, continentsObj) => {
-    const xs = [];
-    //const ys = [];
+    let res = [];
+
     for (let i = 0; i < citiesArr.length; i++) {
         const cityObj = citiesArr[i];
         let city = constructCityFromData(cityObj);
-        //     xs.push(city.cityPopulation);
+        let btn = createBtn(city.cityName, city.country);
+        res.push(btn);
         for (const key in continentsObj) {
-            let con = continentsObj[key];
+            let con = continentsObj[key].totalData;
             const matchCountry = con.find((element) => {
                 return element[city.country];
             });
             if (matchCountry) {
-                matchCountry.cities.push(city);
+                matchCountry.cities.cityNamePlot.push(city.cityName);
+                matchCountry.cities.cityNumPlot.push(city.cityPopulation);
+                matchCountry.cities.totalData.push(city);
             }
         }
     }
-    //  return { xs };
 };
 
 export const traverseCountryData = (continentsObj, countriesObj) => {
     const keys = Object.keys(countriesObj);
     keys.forEach((element) => {
         let country = constructCountryFromData(countriesObj[element]);
-        let f = continentsObj[countriesObj[element].region];
-        f.push(country);
+        const matchContinent = continentsObj[countriesObj[element].region];
+        const countryNameToPlot = matchContinent.countryNamePlot;
+        const countryNumToPlot = matchContinent.countryNumPlot;
+        const totalToStore = matchContinent.totalData;
+        const container = matchContinent.contentContainer;
+        countryNameToPlot.push(country.countryName);
+        countryNumToPlot.push(country.countryPopulation);
+        totalToStore.push(country);
+        const btn = createBtn(country.countryName);
+        container.appendChild(btn);
     });
+};
+
+export const createBtn = (name) => {
+    const cBtn = document.createElement("button");
+    cBtn.textContent = name;
+    cBtn.addEventListener("click", plotContinent);
+    return cBtn;
 };

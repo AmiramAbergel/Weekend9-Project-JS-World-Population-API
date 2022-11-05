@@ -3,14 +3,23 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-.chartContainer {
-    height: 50vh;
-    width: 50%;
-    position: absolute;
-    top: 300px;
-    left: 500px;
+.btnContainer {
 }
 
-.btnContainer {
+.chartContainer {
+    margin: 5rem;
+    margin-top: 7rem;
+    margin-left: 16rem;
+    position: relative;
+    height: 40vh;
+    width: 60vw;
+}
+#chart {
+    border: 1px dotted red;
+    position: absolute;
+}
+
+.cBtnContainer {
+    position: absolute;
+    margin: 2rem;
 }
