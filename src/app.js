@@ -1,5 +1,6 @@
 import { plotData as plotData } from "./js/plotData.js";
 import { plotContinent, chartIt } from "./js/chartJS.js";
+import { getData } from "./js/getData.js";
 
 export const continentContainer = document.querySelector(".btnContainer");
 export const africaBtn = document.querySelector(".africa");
@@ -13,9 +14,10 @@ americasBtn.addEventListener("click", plotContinent);
 asiaBtn.addEventListener("click", plotContinent);
 europeBtn.addEventListener("click", plotContinent);
 oceaniaBtn.addEventListener("click", plotContinent);
-export const btnContainer = document.querySelector(".cBtnContainer");
+export const btnContainer = document.getElementById("cBtnContainer");
 
 const main = async () => {
+    await getData();
     await chartIt();
 };
 main();

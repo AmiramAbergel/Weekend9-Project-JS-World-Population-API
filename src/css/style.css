@@ -19,7 +19,7 @@
     position: absolute;
 }
 
-.cBtnContainer {
+#cBtnContainer {
     position: absolute;
-    margin: 2rem;
+    margin: 4rem;
 }

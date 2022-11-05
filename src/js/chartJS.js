@@ -11,6 +11,7 @@ export const plotContinent = (event) => {
             case "Africa":
                 btnContainer.replaceChildren();
                 btnContainer.appendChild(continents.Africa.contentContainer);
+                console.dir(continents.Africa.contentContainer);
                 preparingForChart(continents.Africa);
                 break;
             case "Americas":
@@ -34,9 +35,24 @@ export const plotContinent = (event) => {
                 preparingForChart(continents.Oceania);
                 break;
             default:
+                btnContainer.replaceChildren();
                 break;
         }
-    } else if (input.matches(".btnCity")) {
+    } else if (input.matches(".countryBtn")) {
+        console.dir(input.parentElement);
+        let matchName = input.parentElement.className;
+        let structName = matchName.charAt(0).toUpperCase() + matchName.slice(1);
+        console.log(structName);
+        const matchCountry = continents[structName].totalData.find(
+            (element) => {
+                return element[input.textContent];
+            }
+        );
+        console.log(matchCountry);
+        if (matchCountry) {
+            preparingForChart(matchCountry.cities);
+        }
+    } else {
     }
 };
 
@@ -44,18 +60,19 @@ export function preparingForChart(obj) {
     let dataArr = [];
     let labelsArr = [];
     if (obj.countryNumPlot) {
+        console.log("no");
         dataArr = obj.countryNumPlot;
         labelsArr = obj.countryNamePlot;
     } else {
-        dataArr = obj.countryNumPlot;
-        labelsArr = obj.countryNamePlot;
+        console.log("yes");
+        dataArr = obj.cityNumPlot;
+        labelsArr = obj.cityNamePlot;
     }
 
     chartIt(dataArr, labelsArr);
 }
 
 export const chartIt = async (dataPlot, xLabels) => {
-    await getData();
     const yPopNum = [];
     const data = {
         labels: xLabels,

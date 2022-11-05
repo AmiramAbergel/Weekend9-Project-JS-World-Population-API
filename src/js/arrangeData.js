@@ -92,7 +92,8 @@ export const traverseCityData = (citiesArr, continentsObj) => {
     for (let i = 0; i < citiesArr.length; i++) {
         const cityObj = citiesArr[i];
         let city = constructCityFromData(cityObj);
-        let btn = createBtn(city.cityName, city.country);
+        let btn = createBtn(city.cityName);
+        btn.classList.add("cityBtn");
         res.push(btn);
         for (const key in continentsObj) {
             let con = continentsObj[key].totalData;
@@ -121,6 +122,7 @@ export const traverseCountryData = (continentsObj, countriesObj) => {
         countryNumToPlot.push(country.countryPopulation);
         totalToStore.push(country);
         const btn = createBtn(country.countryName);
+        btn.classList.add("countryBtn");
         container.appendChild(btn);
     });
 };
